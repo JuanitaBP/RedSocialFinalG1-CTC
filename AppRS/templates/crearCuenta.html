@@ -2,4 +2,11 @@
 <title>Crear Cuenta</title>
 {% endblock "titulo" %} {% block "content" %}
 <p>Esto es la página de crear cuenta</p>
+
+{{error}}
+<form action="{% url "crearcuenta" %}" method="POST">
+  {% csrf_token %}
+  {{form}}
+  <button type="submit">Crear Cuenta</button>
+</form>
 {% endblock "content" %}
