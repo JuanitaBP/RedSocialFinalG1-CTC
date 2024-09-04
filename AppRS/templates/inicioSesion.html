@@ -1,6 +1,8 @@
-{% extends "index.html" %} {% block "titulo" %}
+{% extends "index.html" %} 
+{% block "titulo" %}
 <title>Inicio de Sesión</title>
-{% endblock "titulo" %} {% block "content" %}
+{% endblock "titulo" %} 
+{% block "content" %}
 
 {{error}}
 <p>Esto es la página del inicio de sesión</p>
@@ -8,6 +10,6 @@
 <form action={% url "iniciosesion" %} method="POST">
     {%csrf_token%}
     {{form}} 
-    <button>Iniciar sesión</button>
+    <button class="btn boton" > Iniciar sesión</button>
   </form>
 {% endblock "content" %}

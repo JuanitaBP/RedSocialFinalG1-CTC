@@ -15,7 +15,7 @@ def index(request):
     return render(request, 'index.html')
 
 def crear_cuenta(request):
-    form = UserCreationForm
+    form = UserCreationForm # Instancia del formulario
     if request.method == "POST":
         user = User.objects.create_user(
             username=request.POST["username"],
@@ -63,3 +63,20 @@ def posts(request):
     return render(request, 'Publicacion.html')
 
 
+def privacidad(request):
+    return render(request, 'privacidad.html')
+
+def terminos(request):
+    return render(request, 'terminos.html')
+
+def buscar(request):
+    return render(request, 'buscar.html')
+
+def home(request):
+    return render(request, 'home.html')
+
+def perfil(request):
+    return render(request, 'perfil.html')
+
+def addPublicacion(request):
+   return render(request, 'Publicacion.html')

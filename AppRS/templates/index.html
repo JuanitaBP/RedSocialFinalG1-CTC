@@ -1,3 +1,5 @@
+
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,16 +11,19 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'formulario.css' %}"><!-- Diseño para el crear cuenta -->
 
     {% block "titulo" %}
-    <title>Inicio</title>
+    <title>Army</title>
     {% endblock "titulo" %}
+
   </head>
+  
   <body>
     <header>
-      <h1>Agregar una cabecera para el proyecto de red social</h1>
-
-      <nav>
+      {% include 'encabezado.html' %}  <!-- Este es el archivo de encabezado -->
+      {% comment %} <nav>
         <ul>
           {% if user.is_authenticated %}
               <p>Bienvenida, {{ user.username }}!</p>
@@ -28,17 +33,38 @@
               <li><a href="{% url "iniciosesion"%}">Iniciar Sesión</a></li>
           {% endif %}
         </ul>
-      </nav>
+      </nav> {% endcomment %}
     </header>
 
     {% block "content" %}
-    <p>veamos</p>
-    
-    
+    <div class="container-fluid">
+      <div class="row vh-100 fondo2" >
+
+        <!-- Columna izquierda para el texto -->
+        <div class="col-md-6 d-flex flex-column justify-content-center align-items-start text-white fondo2 p-5">
+          <h1 class="mb-4">Comparte tus intereses con tus amigos</h1>
+          <h3 class="mb-4">Únete Hoy a K-Media</h3>
+          <div class="d-grid gap-2">
+            <button class="btn colorBoton mb-2">Registrarse con Google</button>
+            <button class="btn colorBoton mb-2">Registrarse con Apple</button>
+            <hr class="text-white">
+            <a href="{% url "crearcuenta" %}"  
+             <button class="btn btn-primary BotonCrearCuenta "> Crear cuenta</button>
+            </a> 
+          </div>
+          <p class="mt-4">¿Ya tienes una cuenta? <a href="{% url 'iniciosesion' %}" class="text-white HoverTxt">Iniciar sesión</a></p>
+        </div>
+
+        <!-- Columna derecha para la imagen -->
+        <div class="col-md-4 d-flex justify-content-center align-items-center ">
+          <img src="https://firebasestorage.googleapis.com/v0/b/pruebag-d346f.appspot.com/o/inicio.png?alt=media&token=0da80b1c-d3b0-4299-a68d-ecf99e2288a8" class="imgInicio" alt="Imagen de inicio">
+      </div>
+      </div>
+    </div>
 
     {% endblock "content" %}
     <footer>
-      <p>Agregar aquí un footer para la red social</p>
+      {% include 'footer.html' %}  <!-- Este es el archivo de pie de página -->
     </footer>
 
     <script
