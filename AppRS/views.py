@@ -18,7 +18,7 @@ def crear_cuenta(request):
     if request.user.is_authenticated:
         return redirect("home")  # Redirigir si el usuario ya está logueado
 
-    form = UserCreationForm
+    form = UserCreationForm # Instancia del formulario
     if request.method == "POST":
         if request.POST["password1"] == request.POST["password2"]:
             try:
@@ -73,3 +73,20 @@ def posts(request):
     return redirect("index")
 
 
+def privacidad(request):
+    return render(request, 'privacidad.html')
+
+def terminos(request):
+    return render(request, 'terminos.html')
+
+def buscar(request):
+    return render(request, 'buscar.html')
+
+def home(request):
+    return render(request, 'home.html')
+
+def perfil(request):
+    return render(request, 'perfil.html')
+
+def addPublicacion(request):
+   return render(request, 'Publicacion.html')

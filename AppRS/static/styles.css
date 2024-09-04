@@ -1,3 +1,45 @@
-.title{
-    color: rgb(195, 0, 255);
+body{
+  background-color: #B084BA;
+}
+.fondo2{
+  background-color: #B084BA;
+}
+
+.colorBoton{
+background-color: #AAB6DE;
+}
+
+.BotonCrearCuenta{
+  background-color: #52a1da;
+}
+
+.imgInicio{
+  background-color: transparent !important;/* Fondo de la imagen transparente */
+  border: none; /* sin bordes */
+}
+
+.ColorEncabezado{
+  background-color: #8364A0;
+}
+
+.ColorFooter{
+  background-color: #8364A0;
+}
+
+/* ------------vistas del navegador cuando ya inicias sesion --------*/
+
+nav .estiloIcon {
+  font-size: 14px; /* Tamaño del texto */
+  color: white; /* Color del texto */
+ 
+}
+
+nav .estiloIcon i {
+  font-size: 24px; /* Tamaño de los íconos */
+}
+
+/* Efecto hover */
+nav .estiloIcon hover {
+  color: #00A6ED; /* Cambia el color cuando se pasa el mouse */
+  
 }

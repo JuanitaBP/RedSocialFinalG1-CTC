@@ -1,12 +1,35 @@
-{% extends "index.html" %} {% block "titulo" %}
-<title>Crear Cuenta</title>
-{% endblock "titulo" %} {% block "content" %}
-<h1>Esto es la página de crear cuenta</h1>
+{% extends "index.html" %}
+<!-- {% load static %} -->
 
+
+
+ {% block "titulo" %}
+<title>Crear Cuenta</title>
+{% endblock "titulo" %} 
+
+{% block "content" %}
+<div class="form-container">
+  <img src="https://firebasestorage.googleapis.com/v0/b/pruebag-d346f.appspot.com/o/crearC.png?alt=media&token=ac1b1d98-1e17-4a3b-b407-98521680a132" alt="Logo" class="form-image">
 {{error}}
-<form action="{% url "crearcuenta" %}" method="POST">
-  {% csrf_token %}
-  {{form}}
-  <button type="submit">Crear Cuenta</button>
+  <form action="{% url "crearcuenta" %}" method="POST" class="form-conten">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_username">Nombre de usuario:</label>
+        {{ form.username }}  <!-- Campo de nombre de usuario -->
+    </div>
+
+    <div class="form-group">
+        <label for="id_password1">Contraseña:</label>
+        {{ form.password1 }}  <!-- Campo de contraseña -->
+    </div >
+
+    <div class="form-group">
+        <label for="id_password2">Confirmar contraseña:</label>
+        {{ form.password2 }}  <!-- Campo de confirmación de contraseña -->
+    </div>
+
+    <button class ="form-button" type="submit">Registrar</button>
 </form>
+</div>
+
 {% endblock "content" %}
