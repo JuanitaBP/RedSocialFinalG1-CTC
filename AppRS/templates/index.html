@@ -26,11 +26,11 @@
       {% comment %} <nav>
         <ul>
           {% if user.is_authenticated %}
-              <p>Bienvenida, {{ user.username }}!</p>
+              <p>Bienvenido ARMY, {{ user.username }}!</p>
               <a href="{% url 'cerrarsesion' %}">Cerrar Sesión</a>
           {% else %}
               <li><a href="{% url "crearcuenta" %}">Registrarse</a></li>
-              <li><a href="{% url "iniciosesion"%}">Iniciar Sesión</a></li>
+              <li><a href="{% url "iniciosesion" %}">Iniciar Sesión</a></li>
           {% endif %}
         </ul>
       </nav> {% endcomment %}
