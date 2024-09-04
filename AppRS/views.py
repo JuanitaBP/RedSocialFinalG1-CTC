@@ -15,17 +15,25 @@ def index(request):
     return render(request, 'index.html')
 
 def crear_cuenta(request):
+    if request.user.is_authenticated:
+        return redirect("home")  # Redirigir si el usuario ya está logueado
+
     form = UserCreationForm
     if request.method == "POST":
-        user = User.objects.create_user(
-            username=request.POST["username"],
-            password=request.POST["password1"],
-        )
-        user.save()  # Guardar el usuario en la base de datos
-        login(request, user)
-        return redirect("home")
-  
-    return render(request, "crearCuenta.html", {"form": form})
+        if request.POST["password1"] == request.POST["password2"]:
+            try:
+                user = User.objects.create_user(
+                    username=request.POST["username"],
+                    password=request.POST["password1"],
+                )
+                user.save() # Guardar el usuario en la base de datos
+                login(request, user) # Iniciar sesión automáticamente
+                return redirect("home")
+            except:
+                return render(request, "crearCuenta.html", {"error": "El usuario ya existe"})
+        else:
+            return render(request, "crearCuenta.html", {"error": "Las contraseñas no coinciden"})
+    return render(request, "crearCuenta.html",{"form": form})
 
 
 #
@@ -60,6 +68,8 @@ def cerrar_sesion(request):
     return redirect("index")
 
 def posts(request):
-    return render(request, 'Publicacion.html')
+    if request.user.is_authenticated:
+        return render(request, "publicacion.html", {"data": "aquí se verán las tasks creadas"})
+    return redirect("index")
 
 
