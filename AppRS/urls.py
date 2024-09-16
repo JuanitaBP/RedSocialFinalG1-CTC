@@ -13,8 +13,8 @@ urlpatterns = [
     path('privacidad/', views.privacidad, name='privacidad'),
     path('terminos/', views.terminos, name='terminos'),
     path('buscar/', views.buscar, name='buscar'),
-    path('addPublicacion/',views.addPublicacion, name='addPublicacion'),
-    path('perfil/', views.perfil, name='perfil'),
+    path('publicacion/crear/',views.addPublicacion, name='crearPublicacion'),
+    path('perfil/', views.perfil, name='perfil')
     
 ]
 if settings.DEBUG:

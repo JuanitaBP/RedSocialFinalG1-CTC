@@ -1,17 +1,30 @@
-{% extends "index.html" %} 
+{% extends "index.html" %}
 
 <head>
+  <!-- Bootstrap Icons -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+    rel="stylesheet"
+  />
+  {% block "titulo" %}
+  <title>Inicio</title>
 
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    {% block "titulo" %}
-     <title>home</title>
-    {% endblock "titulo" %} 
-
+  {% endblock "titulo" %}
 </head>
-
-
 
 {% block "content" %}
 <p>Este es el home</p>
-{% endblock "content" %}
+
+<a href="/publicacion/crear/">Nueva Publicación</a>
+{% for post in posts %}
+<div>
+  <h4>{{post.titulo}}</h4>
+  {% if post.imagen %}
+  <img src="{{ post.imagen.url }}" alt="Imagen de {{ post.titulo }}" />
+  {% else %}
+  <p>No hay imagen disponible</p>
+  {% endif %}
+  <p>{{post.descripcion}} - {{post.user.username}}</p>
+  <em>{{post.created}}</em>
+</div>
+{% endfor %} {% endblock "content" %}

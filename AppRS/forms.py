@@ -1,7 +1,19 @@
 from django import forms
-from .models import User
+from .models import Post, PerfilUsuario
+from django.forms import ModelForm
 
-class UserProfileForm(forms.ModelForm):
+class UserProfileForm(ModelForm):
     class Meta:
-        model = User
-        fields = ['nombre', 'apellido', 'fecha_nacimiento', 'foto_perfil']
+        model = PerfilUsuario
+        fields = ['nombre', 'biografia', 'fecha_nacimiento', 'foto_perfil', 'edad']
+
+class PostForm(ModelForm):
+    class Meta:
+        model = Post
+        fields = ["titulo", "descripcion", "importante", 'imagen']
+        widgets = {
+            "titulo": forms.TextInput(attrs={"class": "form-control"}),
+            "descripcion": forms.Textarea(attrs={"class": "form-control"}),
+            "importante": forms.CheckboxInput(attrs={"class": "form-check-input"}),
+            "imagen": forms.FileInput(attrs={"class": "form-control-file"})
+        }
