@@ -1,13 +1,15 @@
 """Modulo para manejar las respuestas de las urls"""
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.http import HttpResponse
+from .models import PerfilUsuario
 
 #Estas importaciones proporcionan las funciones y clases necesarias para manejar
 # la autenticación, renderización de plantillas y redirecciones en Django.
 from django.contrib.auth.models import User # Modelo de usuario predeterminado de Django
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
+
 
 
 # Create your views here.
@@ -72,13 +74,6 @@ def posts(request):
         return render(request, "publicacion.html", {"data": "aquí se verán las tasks creadas"})
     return redirect("index")
 
-
-def privacidad(request):
-    return render(request, 'privacidad.html')
-
-def terminos(request):
-    return render(request, 'terminos.html')
-
 def buscar(request):
     return render(request, 'buscar.html')
 
@@ -86,7 +81,26 @@ def home(request):
     return render(request, 'home.html')
 
 def perfil(request):
-    return render(request, 'perfil.html')
+    # if not request.user.is_authenticated:
+    #     # Redirige o muestra un mensaje si el usuario no ha iniciado sesión
+    #     return redirect('inicioSesion.html')  # Suponiendo que tienes una vista de login
+    # # Obtener el perfil del usuario autenticado
+    # perfil = get_object_or_404(PerfilUsuario, user=request.user)
+    # # Suponiendo que tienes un modelo Post para las publicaciones del usuario
+    # #posts = Post.objects.filter(user=request.user)
+    # # Pasar los datos del perfil y las publicaciones al template
+    # context = {
+    #     'perfil': perfil,
+    #     'user': request.user,
+    #     'posts': posts,
+    # }
+    return render(request, "perfil.html")
 
 def addPublicacion(request):
    return render(request, 'Publicacion.html')
+   
+def privacidad(request):
+    return render(request, 'privacidad.html')
+
+def terminos(request):
+    return render(request, 'terminos.html')

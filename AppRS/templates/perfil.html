@@ -1,0 +1,42 @@
+
+{% extends "index.html" %} 
+{% load static %}
+<head>
+  <link rel="stylesheet" href="{% static 'styles.css' %}"><!-- Diseño para Inicio de Sesion-->
+  {% block "titulo" %}
+  <title>{{ user.username }}'s Perfil</title>
+  {% endblock "titulo" %} 
+
+</head>
+
+{% block "content" %}
+
+{{error}}
+<p>VISTA PERFIL USUARIO</p>
+<body>
+  <div class="profile-container">
+      <!-- Información del Perfil -->
+      <div class="profile-header">
+          <img src="{{ perfil.foto_perfil.url }}" alt="Foto de perfil" class="profile-picture">
+          <div class="profile-info">
+              <h1>{{ user.username }}</h1>
+              <p>{{ perfil.biografia }}</p>
+              <p>Seguidores: 0 | Siguiendo: 0</p> <!-- segudores-->
+          </div>
+      </div>
+
+      <!-- Mostrar publicaciones -->
+      <div class="posts-grid">
+          {% for post in posts %}
+              <div class="post">
+                  <a href="{% url 'post_detail' post.id %}">
+                      <img src="{{ post.image.url }}" alt="Imagen del post">
+                  </a>
+              </div>
+          {% empty %}
+              <p>No hay publicaciones aún.</p>
+          {% endfor %}
+      </div>
+  </div>
+</body>
+{% endblock "content" %}

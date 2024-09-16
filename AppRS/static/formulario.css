@@ -1,23 +1,23 @@
+
 /* Centrar el formulario */
 .form-container {
     display: flex;
     justify-content: center;  /* Centra horizontalmente */
     align-items: center;      /* Centra verticalmente */
     min-height: 95vh;        /* Altura mínima de la ventana */
+    border-radius: 10px;
+    
+    
 }
-/* Estilo de la imagen */
-.form-image {
-    max-width: 300px;         /* Ancho máximo de la imagen */
-    margin-bottom: 20px;      /* Espacio debajo de la imagen */
-}
+
 
 /* Estilo del formulario */
 .form-content {
-    background-color: #AAB6DE; /* Color de fondo del formulario */
+    background-color: #AAB6DE;
     padding: 20px;             /* Espaciado interno */
     border-radius: 8px;        /* Bordes redondeados */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
-    width: 300px;              /* Ancho del formulario */
+    width: 300px;   
+    
 }
 
 /* Estilo de los grupos de formulario */
@@ -30,7 +30,7 @@
 }
 
 .form-group input{
-    background-color:#8ABCDF;
+    background-color:#b3d4eb;
     border-style: none;
 }
 
@@ -46,9 +46,15 @@
 }
 
 .form-button2{
-    background-color: #8ABCDF
+    background-color: #8ABCDF;
     
 }
 .form-button:hover {
     background-color: #FE979C; /* Cambia color al pasar el mouse */
+}
+
+/* Estilo de la imagen de crear cuenta*/
+.form-image {
+    max-width: 300px;         /* Ancho máximo de la imagen */
+    margin-bottom: 20px;      /* Espacio debajo de la imagen */
 }

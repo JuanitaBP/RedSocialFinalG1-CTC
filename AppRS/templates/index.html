@@ -11,9 +11,9 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="{% static "styles.css" %}" />
-    <link rel="stylesheet" href="{% static "formulario.css" %}"><!-- Diseño para el crear cuenta -->
-
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'formulario.css' %}"><!-- Diseño para el crear cuenta -->
+    
     {% block "titulo" %}
     <title>Army</title>
     {% endblock "titulo" %}
@@ -23,17 +23,6 @@
   <body>
     <header>
       {% include 'encabezado.html' %}  <!-- Este es el archivo de encabezado -->
-      {% comment %} <nav>
-        <ul>
-          {% if user.is_authenticated %}
-              <p>Bienvenido ARMY, {{ user.username }}!</p>
-              <a href="{% url 'cerrarsesion' %}">Cerrar Sesión</a>
-          {% else %}
-              <li><a href="{% url "crearcuenta" %}">Registrarse</a></li>
-              <li><a href="{% url "iniciosesion" %}">Iniciar Sesión</a></li>
-          {% endif %}
-        </ul>
-      </nav> {% endcomment %}
     </header>
 
     {% block "content" %}
