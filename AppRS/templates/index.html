@@ -11,8 +11,8 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="{% static 'styles.css' %}" />
-    <link rel="stylesheet" href="{% static 'formulario.css' %}"><!-- Diseño para el crear cuenta -->
+    <link rel="stylesheet" href="{% static "styles.css" %}" />
+    <link rel="stylesheet" href="{% static "formulario.css" %}"><!-- Diseño para el crear cuenta -->
 
     {% block "titulo" %}
     <title>Army</title>
@@ -49,7 +49,7 @@
             <button class="btn colorBoton mb-2">Registrarse con Apple</button>
             <hr class="text-white">
             <a href="{% url "crearcuenta" %}"  
-             <button class="btn btn-primary BotonCrearCuenta "> Crear cuenta</button>
+             <button class="btn btn-primary BotonCrearCuenta"> Crear cuenta</button>
             </a> 
           </div>
           <p class="mt-4">¿Ya tienes una cuenta? <a href="{% url 'iniciosesion' %}" class="text-white HoverTxt">Iniciar sesión</a></p>
