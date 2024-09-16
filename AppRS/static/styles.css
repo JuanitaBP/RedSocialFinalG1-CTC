@@ -20,11 +20,17 @@ background-color: #AAB6DE;
 
 .ColorEncabezado{
   background-color: #8364A0;
+  
 }
 
 .ColorFooter{
   background-color: #8364A0;
+  height: 200px;
 }
+
+/* .Div-footer{
+  height: 200px;
+} */
 
 /* ------------vistas del navegador cuando ya inicias sesion --------*/
 
