@@ -30,5 +30,6 @@ Cuando hayas terminado de trabajar en tu proyecto, puedes desactivar el entorno 
     deactivate
     ```
 5. **Correr el servidor (opcional):**
-    ```python manage.py runserver
+    ```bash
+    python manage.py runserver
     ```

@@ -14,7 +14,7 @@ class PerfilUsuario(models.Model):
     
     
 class Post(models.Model):
-    titulo = models.CharField(max_length=100)
+    titulo = models.CharField(max_length=100,blank=True)
     descripcion = models.TextField(blank=True)
     importante = models.BooleanField(default=False)
     imagen = models.ImageField(upload_to='imagenes/', null=True, blank=True)
