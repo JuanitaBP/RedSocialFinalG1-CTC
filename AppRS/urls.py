@@ -14,7 +14,9 @@ urlpatterns = [
     path('terminos/', views.terminos, name='terminos'),
     path('buscar/', views.buscar, name='buscar'),
     path('publicacion/crear/',views.addPublicacion, name='crearPublicacion'),
-    path('perfil/', views.perfil, name='perfil')
+    path('perfil/', views.perfil, name='perfil'),  # Muestra el perfil del usuario autenticado
+    path('perfil/editar/', views.editar_perfil, name='editar_perfil'),
+    path('perfil/<str:username>/', views.perfil, name='ver_perfil'),  # Muestra el perfil de otro usuario por su nombre de usuario
     
 ]
 if settings.DEBUG:

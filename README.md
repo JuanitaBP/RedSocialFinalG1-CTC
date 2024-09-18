@@ -33,3 +33,16 @@ Cuando hayas terminado de trabajar en tu proyecto, puedes desactivar el entorno 
     ```bash
     python manage.py runserver
     ```
+
+6. **Ver las Mograciones en la DB(opcional):**
+    ```bash
+    python manage.py showmigrations
+    ```
+7. **Aplicar  Mograciones pendientes en la DB(opcional):**
+    ```bash
+    python manage.py migrate
+    ```
+8. **Crear cambios de la DB (solo si cambias el modelo ) (opcional):**
+    ```bash
+    python manage.py makemigrations
+    ```

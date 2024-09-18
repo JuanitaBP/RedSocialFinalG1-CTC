@@ -14,4 +14,4 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.unregister(User)  #quita la configuracion por defecto 
 admin.site.register(User,UserAdmin)    #regitramos los cambios personalizados 
-
+admin.site.register(PerfilUsuario) 

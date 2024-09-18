@@ -9,40 +9,64 @@
 
 {% block "content" %} {{error}}
 <p>VISTA PERFIL USUARIO</p>
-<body>
-  <div class="profile-container">
-    <!-- Información del Perfil -->
-    <div class="profile-header">
-      {% if perfil.foto_perfil %}
-      <img
-        src="{{ perfil.foto_perfil.url }}"
-        alt="Foto perfil"
-        class="profile-picture"
-      />
-      {%else%}
-      <p>Foto de perfil no cargada</p>
-      {% endif %}
 
-      <div class="profile-info">
-        <h1>{{ user.username }}</h1>
-        <p>{{ perfilUsuario.biografia }}</p>
-        <p>Seguidores: 0 | Siguiendo: 0</p>
-        <!-- segudores-->
-      </div>
+<body>
+  <!-- Sección superior del perfil -->
+  <div class="profile-header">
+    <!-- Imagen de perfil -->
+
+    <div class="profile-image">
+      {% if perfil.foto_perfil %}
+        <img src="{{ perfil.foto_perfil.url }}" alt="Imagen de perfil" />
+      {% else %}
+        <img src="{% static 'default_profile_image.jpg' %}" alt="Imagen de perfil predeterminada" />
+      {% endif %}
     </div>
 
-    <!-- Mostrar publicaciones -->
-    <!-- <div class="posts-grid">
-      {% for post in posts %}
-      <div class="post">
-        <a href="{% url 'post_detail' post.id %}">
-          <img src="{{ post.image.url }}" alt="Imagen del post" />
-        </a>
+    <!-- Información del usuario -->
+    <div class="profile-info">
+      <h2>{{ user.username }}</h2>
+       <!-- Botón de editar perfil (Solo se muestra si es el perfil del usuario autenticado) -->
+      {% if user == perfil.nombre %}
+      <a href="{% url 'editar_perfil' %}" class="btn btn-outline-light editar-perfil-btn">Editar perfil</a>
+      {% endif %}
+      
+      <div class="profile-stats">
+        <span><strong>{{ num_publicaciones }}</strong> publicaciones</span>
+        <span><strong>{{ num_seguidores }}</strong> seguidores</span>
+        <span><strong>{{ num_seguidos }}</strong> seguidos</span>
       </div>
-      {% empty %}
-      <p>No hay publicaciones aún.</p>
-      {% endfor %}
-    </div> -->
+      
+
+      <!-- Descripción o biografía -->
+    <div class="profile-description">
+      <p>{{ perfil.biografia }}</p>
+    </div>
+    </div>
+
   </div>
+
+  <!-- Barra de navegación (Publicaciones, Guardado, Etiquetas) -->
+  <div class="profile-nav">
+    <button class="active">Publicaciones</button>
+    <button>Guardado</button>
+    <button>Etiquetas</button>
+  </div>
+
+  <!-- Sección de publicaciones en cuadrícula -->
+  <div class="profile-posts-grid">
+    {% if posts %}
+      {% for post in posts %}
+
+        <div class="post-item">
+          <img src="{{ post.imagen.url }}" alt="Publicación" />
+        </div>
+        
+      {% endfor %}
+    {% else %}
+      <p>Este usuario no tiene publicaciones.</p>
+    {% endif %}
+  </div>
+
 </body>
 {% endblock "content" %}

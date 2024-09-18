@@ -1,0 +1,67 @@
+/* Contenedor principal para las publicaciones */
+.posts-grid {
+    display: grid;
+    grid-template-columns: 1fr;  /* Una columna para centrar las publicaciones */
+    justify-items: center;       /* Centrar las publicaciones */
+    padding: 20px;
+}
+
+/* Tarjeta individual de publicación */
+.post-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 500px;                /* Ancho máximo de la tarjeta, similar al estilo de Instagram */
+    margin: 20px auto;           /* Márgenes automáticos para centrar la tarjeta */
+    transition: transform 0.2s;
+}
+
+.post-card:hover {
+    transform: scale(1.05);      /* Efecto hover */
+}
+
+/* Imagen dentro de la tarjeta */
+.post-image {
+    width: 100%;                 /* Imagen ocupa todo el ancho de la tarjeta */
+    height: 500px;               /* Limitar la altura máxima de la imagen */
+    object-fit: cover;           /* Ajuste de la imagen sin perder la proporción */
+}
+
+/* Contenido del post */
+.post-content {
+    padding: 15px;
+}
+
+.post-content h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.post-content p {
+    font-size: 1em;
+    margin: 5px 0;
+}
+
+.post-content em {
+    color: #777;
+    font-size: 0.9em;
+}
+
+/*estilo iconos del post*/
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    font-size: 1.5em;
+}
+
+.post-actions i {
+    cursor: pointer;  /* Hacer que el cursor cambie a mano cuando se pasa sobre los iconos */
+    padding-right: 10px;  /* Espacio entre los iconos */
+    transition: color 0.3s ease;
+}
+
+.post-actions i:hover {
+    color: #00A6ED;  /* Cambiar de color al pasar el ratón, por ejemplo, rojo para el icono de "me gusta" */
+}

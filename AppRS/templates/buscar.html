@@ -6,4 +6,9 @@
 
 {% block "content" %}
 <p>Esta es la vista para buscar a otros usuarios</p>
+<form method="GET" action="{% url 'buscar_usuario' %}">
+    <input type="text" name="q" placeholder="Buscar usuario...">
+    <button type="submit">Buscar</button>
+</form>
+
 {% endblock "content" %}

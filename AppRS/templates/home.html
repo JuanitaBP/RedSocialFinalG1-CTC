@@ -6,6 +6,7 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
     rel="stylesheet"
   />
+
   {% block "titulo" %}
   <title>Inicio</title>
 
@@ -16,16 +17,50 @@
 <p>Este es el home</p>
 
 <a href="/publicacion/crear/">Nueva Publicación</a>
-{% for post in posts %}
-<div>
-  <h4>{{post.titulo}}</h4>
-  {% if post.imagen %}
-  <img src="{{ post.imagen.url }}" alt="Imagen de {{ post.titulo }}" />
-  {% else %}
-  <p>No hay imagen disponible</p>
-  {% endif %}
-  <p>{{post.descripcion}} - {{post.user.username}}</p>
-  <em>{{post.created}}</em>
+
+<h2>Publicaciones Recientes</h2>
+<div class="posts-grid">
+  {% for post in posts %}
+      <div class="post-card">
+        <p>Publicado por: {{ post.user.username }}</p>
+              <em>{{ post.created|date:"d M Y H:i" }}</em>
+          <!-- Imagen de la publicación -->
+          {% if post.imagen %}
+              <img src="{{ post.imagen.url }}" alt="Imagen de {{ post.titulo }}" class="post-image">
+          {% endif %}
+          
+           <!-- Sección de acciones -->
+          <div class="post-actions">
+            <i id="like-icon" class="bi bi-heart"></i> <!-- Me gusta -->
+            <i class="bi bi-chat"></i>  <!-- Comentar -->
+            <i class="bi bi-send"></i>  <!-- Enviar -->
+            <i id="save-icon" class="bi bi-bookmark"></i>  <!-- Guardar -->
+          </div>
+          <!-- Título y descripción -->
+          <div class="post-content">
+              <h2>{{ post.titulo }}</h2>
+              <p>{{ post.descripcion }}</p>
+          </div>
+
+      </div>
+  {% endfor %}
 </div>
-{% endfor %} 
+
+<!-- Icono de me gusta -->
+<script>
+    const likeIcon = document.getElementById('like-icon');
+    likeIcon.addEventListener('click', () => {
+        likeIcon.classList.toggle('bi-heart-fill'); // Cambiar a corazón lleno
+        likeIcon.classList.toggle('bi-heart'); // Cambiar a corazón vacío
+        likeIcon.style.color = likeIcon.classList.contains('bi-heart-fill') ? 'red' : 'black'; // Cambiar color
+    });
+
+    // Funcionalidad para el ícono de "guardar"
+    const saveIcon = document.getElementById('save-icon');
+    saveIcon.addEventListener('click', () => {
+        saveIcon.classList.toggle('bi-bookmark-fill'); // Cambiar a marcador lleno
+        saveIcon.classList.toggle('bi-bookmark'); // Cambiar a marcador vacío
+        saveIcon.style.color = saveIcon.classList.contains('bi-bookmark-fill') ? '#8364A0' : 'black'; // Cambiar color
+    });
+</script>
 {% endblock "content" %}
