@@ -1,11 +1,15 @@
 """Modulo para manejar las respuestas de las urls"""
 
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
+from django.http import HttpResponseForbidden
 from .models import PerfilUsuario, Post
 from .forms import PostForm, EditarPerfilForm, EditarUsuarioForm
 import traceback
 
+from django.core.exceptions import PermissionDenied
+from django.contrib import messages
+from django.http import JsonResponse
 #Estas importaciones proporcionan las funciones y clases necesarias para manejar
 # la autenticación, renderización de plantillas y redirecciones en Django.
 from django.contrib.auth.models import User # Modelo de usuario predeterminado de Django
@@ -179,7 +183,41 @@ def addPublicacion(request):
     redirect("login")
 
 #    return render(request, 'Publicacion.html')
-   
+
+def editarPublicacion(request, post_id):
+    post=get_object_or_404(Post, id=post_id, user =request.user)
+    if request.method=="POST":
+        form = PostForm(request.POST, request.FILES, instance = post)
+        if form.is_valid():
+            form.save()
+            return redirect("home")
+    else:
+        form = PostForm(instance = post)
+        return render(request, "editarPublicacion.html", {"form":form, 'post': post})
+    
+    
+    
+def EliminarPubli(request, post_id):
+    post = get_object_or_404(Post, id=post_id, user=request.user)
+    
+    if request.method == "POST":
+        post.delete()
+        return redirect("home")
+    
+    return render(request, "elimiPubli.html", {"post": post})
+    
+    
+    
+    # if request.method=='POST':
+    #      post = get_object_or_404(Post, id=post_id, user=request.user)
+    #      post.delete()
+    #      return redirect('home')
+    # else:
+    #      raise PermissionDenied()
+     
+    
+    # return render(request,'home.html')
+
 def privacidad(request):
     return render(request, 'privacidad.html')
 
