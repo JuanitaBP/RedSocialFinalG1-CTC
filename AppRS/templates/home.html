@@ -1,6 +1,12 @@
 {% extends "index.html" %}
 
 <head>
+  <!-- Agregar Bootstrap CSS -->
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
+
   <!-- Bootstrap Icons -->
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
@@ -10,21 +16,37 @@
   <title>Inicio</title>
 
   {% endblock "titulo" %}
+  
 </head>
 
-{% block "content" %}
-<p>Este es el home</p>
-
-<a href="/publicacion/crear/">Nueva Publicación</a>
-{% for post in posts %}
-<div>
-  <h4>{{post.titulo}}</h4>
-  {% if post.imagen %}
-  <img src="{{ post.imagen.url }}" alt="Imagen de {{ post.titulo }}" />
-  {% else %}
-  <p>No hay imagen disponible</p>
-  {% endif %}
-  <p>{{post.descripcion}} - {{post.user.username}}</p>
-  <em>{{post.created}}</em>
+{% block "content" %} {% if messages %}
+<div class="container mt-3">
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+  {% endfor %}
 </div>
-{% endfor %} {% endblock "content" %}
+{% endif %}
+<div class="conteinerPubli">
+  {% for post in posts %}
+  <div>
+    <h4>{{post.titulo}}</h4>
+    {% if post.imagen %}
+    <img src="{{ post.imagen.url }}" alt="Imagen de {{ post.titulo }}" />
+    {% else %}
+    <p>No hay imagen disponible</p>
+    {% endif %}
+    <p>{{post.descripcion}} - {{post.user.username}}</p>
+    <em>{{post.created}}</em>
+    <a href="{% url 'editarPublicacion' post.id %}">Editar</a>
+
+    <a href="{% url 'eliminarPublicacion' post.id %}" class="btn btn-danger"
+      >Eliminar</a
+    >
+
+    {% endfor %}
+  </div>
+
+  <a href="/publicacion/crear/">Nueva Publicación</a>
+
+  {% endblock "content" %}
+</div>

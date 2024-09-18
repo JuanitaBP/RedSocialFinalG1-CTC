@@ -14,6 +14,8 @@ urlpatterns = [
     path('terminos/', views.terminos, name='terminos'),
     path('buscar/', views.buscar, name='buscar'),
     path('publicacion/crear/',views.addPublicacion, name='crearPublicacion'),
+    path('publicacion/editar/<int:post_id>/', views.editarPublicacion, name='editarPublicacion'),
+    path('publicacion/eliminar/<int:post_id>/', views.EliminarPubli, name='eliminarPublicacion'),
     path('perfil/', views.perfil, name='perfil')
     
 ]

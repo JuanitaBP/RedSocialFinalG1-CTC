@@ -15,5 +15,5 @@ class PostForm(ModelForm):
             "titulo": forms.TextInput(attrs={"class": "form-control"}),
             "descripcion": forms.Textarea(attrs={"class": "form-control"}),
             "importante": forms.CheckboxInput(attrs={"class": "form-check-input"}),
-            "imagen": forms.FileInput(attrs={"class": "form-control-file"})
+            "imagen": forms.ClearableFileInput(attrs={"class": "form-control-file"})
         }
