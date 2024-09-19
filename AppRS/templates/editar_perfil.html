@@ -18,22 +18,27 @@
             </div>
             <div class="editar-usuario">
                 <h3>{{ user_form.instance.username }}</h3>
-                <a href="#" class="btn btn-primary">Cambiar foto</a>
+                <!-- Campo para cambiar foto -->
+                {{ perfil_form.foto_perfil }}
             </div>
         </div>
-
+    
         <!-- Campos de edición -->
         <div class="form-group">
             <label for="id_biografia">Biografía</label>
             {{ perfil_form.biografia }}
         </div>
-
+    
         <div class="form-group">
             <label for="id_username">Nombre de usuario</label>
             {{ user_form.username }}
         </div>
-
-        <button type="submit" class="btn btn-success">Guardar</button>
+    
+        <!-- Botones de acción -->
+        <div class="form-group botones-accion">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a href="{% url 'perfil' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
     </form>
 </div>
 {% endblock %}

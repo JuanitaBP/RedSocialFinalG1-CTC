@@ -28,10 +28,6 @@ background-color: #AAB6DE;
   height: 200px;
 }
 
-/* .Div-footer{
-  height: 200px;
-} */
-
 /* ------------vistas del navegador cuando ya inicias sesion --------*/
 
 nav .estiloIcon {
@@ -250,4 +246,10 @@ form button[type="submit"] {
 
 form button[type="submit"]:hover {
   background-color:  #FE979C;
+}
+
+.botones-accion {
+  display: flex;
+  justify-content: space-between; /* Colocar los botones en extremos opuestos */
+  margin-top: 15px;
 }

@@ -48,7 +48,7 @@
     font-size: 0.9em;
 }
 
-/*estilo iconos del post*/
+/* Estilo para los iconos del post */
 .post-actions {
     display: flex;
     justify-content: space-between;
@@ -63,5 +63,41 @@
 }
 
 .post-actions i:hover {
-    color: #00A6ED;  /* Cambiar de color al pasar el ratón, por ejemplo, rojo para el icono de "me gusta" */
+    color: #00A6ED;  /* Cambiar de color al pasar el ratón */
+}
+
+/* Contenedor para los botones de editar y eliminar */
+.post-actions-buttons {
+    display: flex;
+    justify-content: space-between; /* Colocar los botones en extremos opuestos */
+    padding: 10px 15px;
+}
+
+.post-actions-buttons .btn {
+    padding: 5px 15px; /* Tamaño de los botones */
+    font-size: 0.9em; /* Un tamaño de texto ligeramente más pequeño */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease; /* Transición suave para el color */
+}
+
+/* Estilo para el botón de editar */
+.post-actions-buttons .btn-warning {
+    background-color: #52a1da;
+    border: none;
+    color: white;
+}
+
+.post-actions-buttons .btn-warning:hover {
+    background-color: #FE979C; /* Color más oscuro al pasar el ratón */
+}
+
+/* Estilo para el botón de eliminar */
+.post-actions-buttons .btn-danger {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+}
+
+.post-actions-buttons .btn-danger:hover {
+    background-color: #c82333; /* Color más oscuro al pasar el ratón */
 }
