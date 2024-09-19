@@ -1,6 +1,7 @@
 from django import forms
 from .models import Post, PerfilUsuario
 from django.forms import ModelForm
+from django.contrib.auth.models import User
 
 class UserProfileForm(ModelForm):
     class Meta:
@@ -15,5 +16,17 @@ class PostForm(ModelForm):
             "titulo": forms.TextInput(attrs={"class": "form-control"}),
             "descripcion": forms.Textarea(attrs={"class": "form-control"}),
             "importante": forms.CheckboxInput(attrs={"class": "form-check-input"}),
-            "imagen": forms.ClearableFileInput(attrs={"class": "form-control-file"})
+             "imagen": forms.ClearableFileInput(attrs={"class": "form-control-file"})
         }
+
+
+class EditarPerfilForm(forms.ModelForm):
+    class Meta:
+        model = PerfilUsuario
+        fields = ['foto_perfil', 'biografia']
+
+class EditarUsuarioForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username']
+

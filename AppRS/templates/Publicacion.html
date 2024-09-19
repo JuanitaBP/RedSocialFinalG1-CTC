@@ -1,6 +1,10 @@
-{% extends "index.html" %} {% block "titulo" %}
+{% extends "index.html" %} 
+{% block "titulo" %}
 <title>Publicación</title>
-{% endblock "titulo" %} {% block "content" %} {{error}}
+{% endblock "titulo" %} 
+{% block "content" %}
+<p>Esto es la página para crear publicaciones</p>
+{{error}}
 <form method="POST" enctype="multipart/form-data">
   {% csrf_token %} {{form}}
 

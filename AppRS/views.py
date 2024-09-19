@@ -4,7 +4,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.http import HttpResponseForbidden
 from .models import PerfilUsuario, Post
-from .forms import PostForm, UserProfileForm
+from .forms import PostForm, EditarPerfilForm, EditarUsuarioForm
+import traceback
 
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
@@ -78,52 +79,81 @@ def cerrar_sesion(request):
 
 def posts(request):
     if request.user.is_authenticated:
-        return render(request, "publicacion.html", {"data": "aquí se verán las tasks creadas"})
+        return render(request, "publicacion.html", {"data": "aquí se verán las publicaciones creadas"})
     return redirect("index")
 
 def buscar(request):
+    query = request.GET.get('q')
+    if query:
+        usuarios = User.objects.filter(username__icontains=query)
+        return render(request, 'buscar.html', {'usuarios': usuarios})
     return render(request, 'buscar.html')
 
 def home(request):
     if request.user.is_authenticated:
-        #ordena las publicaciones, dependiendo cuales fueron marcadas como importantes
-        posts = Post.objects.filter(user=request.user).order_by('-importante', '-created')
-        return render(request, 'home.html', {'posts': posts})
-        
-        
-        # posts = Post.objects.all()  # Obtiene todas las tareas de la BD
-        # return render(request, "home.html", {"posts": posts})
+        posts =Post.objects.all().order_by('-created')
+  # Obtiene todas las publicaciones de la BD
+        return render(request, "home.html", {"posts": posts})
     return redirect("index")
 
+def perfil(request, username=None):
+    if request.user.is_authenticated:
+        if username:
+            # Si se proporciona un nombre de usuario, obtenemos el perfil del usuario indicado
+            user = get_object_or_404(User, username=username)
+        else:
+            # Si no se proporciona un nombre de usuario, mostramos el perfil del usuario autenticado
+            user = request.user
+        # Obtener el perfil del usuario
+        perfil_usuario = get_object_or_404(PerfilUsuario, nombre=user)
+        
+        # Obtener las publicaciones del usuario
+        posts = Post.objects.filter(user=user).order_by('-created')
 
+        # Pasar los datos del perfil y las publicaciones al contexto
+        context = {
+            'perfil': perfil_usuario,
+            'posts': posts,
+            'num_publicaciones': posts.count(),
+            'num_seguidores': perfil_usuario.num_seguidores(),
+            'num_seguidos': perfil_usuario.num_seguidos(),
+        }
+        return render(request, "perfil.html", context)
+    return redirect("index")  # Si no está autenticado, redirige a la página principal
 
-def perfil(request):
-    # if not request.user.is_authenticated:
-    #     # Redirige o muestra un mensaje si el usuario no ha iniciado sesión
-    #     return redirect('inicioSesion.html')  # Suponiendo que tienes una vista de login
-    # # Obtener el perfil del usuario autenticado
-    # perfil = get_object_or_404(PerfilUsuario, user=request.user)
-    # # Suponiendo que tienes un modelo Post para las publicaciones del usuario
-    # #posts = Post.objects.filter(user=request.user)
-    # # Pasar los datos del perfil y las publicaciones al template
-    # context = {
-    #     'perfil': perfil,
-    #     'user': request.user,
-    #     'posts': posts,
-    # }
+def editar_perfil(request, username=None):
+    if request.user.is_authenticated:
+        if username:
+            # Si se proporciona un nombre de usuario, obtenemos el perfil del usuario indicado
+            user = get_object_or_404(User, username=username)
+        else:
+            # Si no se proporciona un nombre de usuario, mostramos el perfil del usuario autenticado
+            user = request.user
+        
+        # Obtener el perfil del usuario autenticado o buscado
+        perfil_usuario = get_object_or_404(PerfilUsuario, nombre=user)
+
+        if request.method == "POST":
+            user_form = EditarUsuarioForm(request.POST, instance=user)
+            perfil_form = EditarPerfilForm(request.POST, request.FILES, instance=perfil_usuario)
+
+            if user_form.is_valid() and perfil_form.is_valid():
+                user_form.save()
+                perfil_form.save()
+                return redirect('perfil')  # Redirigimos al perfil después de guardar
+        else:
+            user_form = EditarUsuarioForm(instance=user)
+            perfil_form = EditarPerfilForm(instance=perfil_usuario)
+
+        # Pasar los formularios al contexto
+        context = {
+            'user_form': user_form,
+            'perfil_form': perfil_form,
+        }
+        return render(request, "editar_perfil.html", context)
+
+    return redirect("index")  # Si no está autenticado, redirige a la página principal
     
-    
-    # perfil = get_object_or_404(PerfilUsuario, nombre=request.user)
-    # return render(request, 'perfil.html', {'perfil': perfil})
-    
-    
-    # user = request.user
-    # perfil = get_object_or_404(PerfilUsuario, nombre=user)
-
-    # return render(request, "perfil.html", {"perfil": perfil})
-
-
-    return render(request, "perfil.html")
 
 def addPublicacion(request):
     if request.user.is_authenticated:
@@ -147,7 +177,7 @@ def addPublicacion(request):
                 return render(
                     request,
                     "Publicacion.html",
-                    {"form": PostForm, "error": "No se pudo crear la publicación"},
+                  {"form": form, "error": "No se pudo crear la publicación"},  # Aquí devuelve el mismo formulario con los datos ingresados
                 )
 
     redirect("login")
