@@ -33,3 +33,12 @@ class EditarUsuarioForm(forms.ModelForm):
         model = User
         fields = ['username']
 
+
+
+class ComentarioForm(forms.ModelForm):
+    class Meta:
+        model = Comentario
+        fields = ['contenido']
+        widgets = {
+            "contenido": forms.Textarea(attrs={"class": "form-control"}),
+            }

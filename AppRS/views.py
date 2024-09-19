@@ -245,4 +245,7 @@ def terminos(request):
     return render(request, 'terminos.html')
 
 
+
+def comentarios(request, post_id):
+    return redirect("home")
   
