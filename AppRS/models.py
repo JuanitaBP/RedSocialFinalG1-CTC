@@ -70,4 +70,3 @@ class Post(models.Model):
         """Verifica si un usuario ya le dio like a la publicación"""
         return self.likes.filter(id=usuario.id).exists()
     
-    

@@ -103,11 +103,14 @@ def perfil(request, username=None):
         if username:
             # Si se proporciona un nombre de usuario, obtenemos el perfil del usuario indicado
             user = get_object_or_404(User, username=username)
+            
         else:
             # Si no se proporciona un nombre de usuario, mostramos el perfil del usuario autenticado
             user = request.user
+            
         # Obtener el perfil del usuario
         perfil_usuario = get_object_or_404(PerfilUsuario, nombre=user)
+        
         # Obtener las publicaciones del usuario
         posts = Post.objects.filter(user=user).order_by('-created')
         guardados = perfil_usuario.posts_guardados.all()  # Obtener publicaciones guardadas
@@ -239,3 +242,6 @@ def privacidad(request):
 
 def terminos(request):
     return render(request, 'terminos.html')
+
+
+  
