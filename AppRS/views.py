@@ -1,5 +1,6 @@
 """Modulo para manejar las respuestas de las urls"""
 
+import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.http import HttpResponseForbidden
@@ -16,7 +17,8 @@ from django.contrib.auth.models import User # Modelo de usuario predeterminado d
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 
-
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 def index(request):
@@ -106,10 +108,9 @@ def perfil(request, username=None):
             user = request.user
         # Obtener el perfil del usuario
         perfil_usuario = get_object_or_404(PerfilUsuario, nombre=user)
-        
         # Obtener las publicaciones del usuario
         posts = Post.objects.filter(user=user).order_by('-created')
-
+        guardados = perfil_usuario.posts_guardados.all()  # Obtener publicaciones guardadas
         # Pasar los datos del perfil y las publicaciones al contexto
         context = {
             'perfil': perfil_usuario,
@@ -117,6 +118,7 @@ def perfil(request, username=None):
             'num_publicaciones': posts.count(),
             'num_seguidores': perfil_usuario.num_seguidores(),
             'num_seguidos': perfil_usuario.num_seguidos(),
+            'guardados': guardados,  # Agregar los posts guardados al contexto
         }
         return render(request, "perfil.html", context)
     return redirect("index")  # Si no está autenticado, redirige a la página principal
@@ -206,17 +208,31 @@ def EliminarPubli(request, post_id):
     
     return render(request, "elimiPubli.html", {"post": post})
     
-    
-    
-    # if request.method=='POST':
-    #      post = get_object_or_404(Post, id=post_id, user=request.user)
-    #      post.delete()
-    #      return redirect('home')
-    # else:
-    #      raise PermissionDenied()
-     
-    
-    # return render(request,'home.html')
+
+@login_required
+@require_POST
+def toggle_guardar_publicacion(request):
+    """Agrega o quita una publicación de las publicaciones guardadas del usuario."""
+    try:
+        data = json.loads(request.body)  # Cargamos los datos del cuerpo de la solicitud JSON
+        post_id = data.get('post_id')  # Asegúrate de obtener el post_id correctamente
+       # print(f"Post ID: {post_id}")
+        post = get_object_or_404(Post, id=post_id)
+        perfil = request.user.perfilusuario
+
+        if post in perfil.posts_guardados.all():
+            perfil.posts_guardados.remove(post)
+            saved = False
+        else:
+            perfil.posts_guardados.add(post)
+            saved = True
+
+        return JsonResponse({'saved': saved})
+    except Exception as e:
+        print(f"Error: {e}")
+        return JsonResponse({'error': 'Algo salió mal.'}, status=400)
+
+
 
 def privacidad(request):
     return render(request, 'privacidad.html')
