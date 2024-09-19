@@ -182,74 +182,126 @@ nav .estiloIcon hover {
 
 
 /*------diseño editar perfil------*/
-
+/* Diseño del contenedor para el formulario de editar perfil */
 .editar-perfil-container {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  background-color:#8364A0; 
+  background-color: #b7a1cc; 
   color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Cabecera del formulario */
 .editar-perfil-header {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
 
+/* Estilo de la foto de perfil */
 .editar-foto img {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   object-fit: cover;
+  border: 2px solid #ddd;
+  margin-right: 20px;
 }
 
+/* Estilo del texto de usuario */
 .editar-usuario h3 {
-  margin-left: 20px;
   font-size: 1.5em;
+  color: white;
 }
 
+/* Estilo de los campos del formulario */
 form .form-group {
   margin-bottom: 15px;
 }
 
 form .form-group label {
   font-size: 1.2em;
-  color: #ccc;
+  color: #ddd;
 }
 
-form .form-group textarea, input {
+/* Estilo del input y textarea */
+form .form-group input, 
+form .form-group textarea {
   width: 100%;
   padding: 10px;
   font-size: 1em;
-  border: none;
-  background-color: #222;
+  background-color: #7ab6e0;
   color: white;
+  border: none;
   border-radius: 5px;
+  margin-top: 5px;
 }
 
 form .form-group textarea {
-  height: 100px;
+  height: 60px;  /* Ajustar la altura del área de biografía */
 }
 
-form button[type="submit"] {
-  display: block;
-  width: 25%;
-  background-color:#52a1da;
+form .form-group input::placeholder, 
+form .form-group textarea::placeholder {
+  color: #ccc;
+}
+
+/* Botones de acción */
+form button[type="submit"],
+form a.btn-secondary {
+  display: inline-block;
+  width: 30%;  /* Ambos botones ocupan el mismo ancho */
+  text-align: center;
+  background-color: #52a1da;
   color: white;
-  padding: 10px;
   border: none;
-  border-radius: 5px;
-  font-size: 1.2em;
   cursor: pointer;
+  padding: 5px 15px; /* Tamaño de los botones */
+    font-size: 0.9em; /* Un tamaño de texto ligeramente más pequeño */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease; /* Transición suave para el color */
 }
 
-form button[type="submit"]:hover {
-  background-color:  #FE979C;
+
+form button[type="submit"]:hover,
+form a.btn-secondary:hover {
+  background-color: #FE979C;  /* Color al pasar el ratón */
 }
 
+/* Estilo especial para el botón Cancelar */
+form a.btn-secondary {
+  background-color: #52a1da;
+}
+
+form a.btn-secondary:hover {
+  background-color: #FE979C;
+}
+
+/* Contenedor de los botones */
 .botones-accion {
   display: flex;
-  justify-content: space-between; /* Colocar los botones en extremos opuestos */
+  justify-content: space-between;  /* Colocar los botones en extremos opuestos */
+  align-items: center;  /* Asegura que estén alineados al mismo nivel */
   margin-top: 15px;
+}
+
+/* Estilo adicional para la imagen */
+.img-thumbnail {
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  margin-bottom: 15px;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.form-control-file {
+  margin-top: 10px;
+  color: white;
+  background-color: #52a1da;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
 }

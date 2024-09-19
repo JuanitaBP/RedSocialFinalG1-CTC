@@ -13,7 +13,6 @@
   <!-- Sección superior del perfil -->
   <div class="profile-header">
     <!-- Imagen de perfil -->
-
     <div class="profile-image">
       {% if perfil.foto_perfil %}
         <img src="{{ perfil.foto_perfil.url }}" alt="Imagen de perfil" />
@@ -25,7 +24,7 @@
     <!-- Información del usuario -->
     <div class="profile-info">
       <h2>{{ user.username }}</h2>
-       <!-- Botón de editar perfil (Solo se muestra si es el perfil del usuario autenticado) -->
+      <!-- Botón de editar perfil (Solo se muestra si es el perfil del usuario autenticado) -->
       {% if user == perfil.nombre %}
       <a href="{% url 'editar_perfil' %}" class="btn btn-outline-light editar-perfil-btn">Editar perfil</a>
       {% endif %}
@@ -35,37 +34,66 @@
         <span><strong>{{ num_seguidores }}</strong> seguidores</span>
         <span><strong>{{ num_seguidos }}</strong> seguidos</span>
       </div>
-      
 
       <!-- Descripción o biografía -->
-    <div class="profile-description">
-      <p>{{ perfil.biografia }}</p>
+      <div class="profile-description">
+        <p>{{ perfil.biografia }}</p>
+      </div>
     </div>
-    </div>
-
   </div>
 
   <!-- Barra de navegación (Publicaciones, Guardado, Etiquetas) -->
   <div class="profile-nav">
-    <button class="active">Publicaciones</button>
-    <button>Guardado</button>
-    <button>Etiquetas</button>
+    <button id="btn-publicaciones" class="active">Publicaciones</button>
+    <button id="btn-guardados">Guardado</button>
   </div>
 
   <!-- Sección de publicaciones en cuadrícula -->
-  <div class="profile-posts-grid">
+  <div class="profile-posts-grid" id="publicaciones">
     {% if posts %}
       {% for post in posts %}
-
         <div class="post-item">
+          {% if post.imagen %}
           <img src="{{ post.imagen.url }}" alt="Publicación" />
+          {% endif %}
         </div>
-        
       {% endfor %}
     {% else %}
       <p>Este usuario no tiene publicaciones.</p>
     {% endif %}
   </div>
+
+  <!-- Sección de publicaciones guardadas en cuadrícula (Oculta inicialmente) -->
+  <div class="profile-posts-grid" id="guardados" style="display: none;">
+    {% if guardados %}
+      {% for post in guardados %}
+        <div class="post-item">
+          {% if post.imagen %}
+          <img src="{{ post.imagen.url }}" alt="Publicación Guardada" />
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No tienes publicaciones guardadas.</p>
+    {% endif %}
+  </div>
+
+  <!-- Script para alternar entre publicaciones y guardados -->
+  <script>
+    document.getElementById('btn-publicaciones').addEventListener('click', function() {
+      document.getElementById('publicaciones').style.display = 'grid';
+      document.getElementById('guardados').style.display = 'none';
+      this.classList.add('active');
+      document.getElementById('btn-guardados').classList.remove('active');
+    });
+
+    document.getElementById('btn-guardados').addEventListener('click', function() {
+      document.getElementById('guardados').style.display = 'grid';
+      document.getElementById('publicaciones').style.display = 'none';
+      this.classList.add('active');
+      document.getElementById('btn-publicaciones').classList.remove('active');
+    });
+  </script>
 
 </body>
 {% endblock "content" %}

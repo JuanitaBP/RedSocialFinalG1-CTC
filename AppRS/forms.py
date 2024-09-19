@@ -24,7 +24,10 @@ class EditarPerfilForm(forms.ModelForm):
     class Meta:
         model = PerfilUsuario
         fields = ['foto_perfil', 'biografia']
-
+        widgets = {
+            'foto_perfil': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
+         }
+         
 class EditarUsuarioForm(forms.ModelForm):
     class Meta:
         model = User
