@@ -94,7 +94,8 @@ def buscar(request):
 def home(request):
     if request.user.is_authenticated:
         # Filtrar publicaciones del usuario autenticado
-        posts = Post.objects.filter(user=request.user).order_by('-created')
+        #posts = Post.objects.filter(user=request.user).order_by('-created')
+        posts =Post.objects.all().order_by('-created')
         return render(request, "home.html", {"posts": posts})
     return redirect("index")
 
