@@ -79,3 +79,21 @@ class Post(models.Model):
     def es_likeado_por(self, usuario):
         """Verifica si un usuario ya le dio like a la publicación"""
         return self.likes.filter(id=usuario.id).exists()
+    
+
+class Comentario(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comentarios')
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    contenido = models.TextField(blank=True)
+    fecha_coment = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Comentario de {self.usuario.username} en {self.post}'
+  
+
+# class Like(models.Model):
+#     post = models.ForeignKey(Post, related_name='likes', on_delete=models.CASCADE)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+#     class Meta:
+#         unique_together = ('post', 'user')  # Asegura que un usuario solo pueda dar like una vez por publicación

@@ -4,8 +4,8 @@ import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.http import HttpResponseForbidden
-from .models import PerfilUsuario, Post
-from .forms import PostForm, EditarPerfilForm, EditarUsuarioForm
+from .models import PerfilUsuario, Post, Comentario
+from .forms import PostForm, EditarPerfilForm, EditarUsuarioForm, ComentarioForm
 import traceback
 
 from django.core.exceptions import PermissionDenied
@@ -92,12 +92,42 @@ def buscar(request):
     return render(request, 'buscar.html')
 
 def home(request):
+    
+    #MUESTRA PUBLICACIONES Y COMENTARIOS
     if request.user.is_authenticated:
-        # Filtrar publicaciones del usuario autenticado
-        #posts = Post.objects.filter(user=request.user).order_by('-created')
-        posts =Post.objects.all().order_by('-created')
-        return render(request, "home.html", {"posts": posts})
+        posts = Post.objects.all().order_by('-created')
+
+        if request.method == 'POST':
+            post_id = request.POST.get('post_id')
+            post = get_object_or_404(Post, id=post_id)
+
+            comentario_form = ComentarioForm(request.POST)
+            if comentario_form.is_valid():
+                comentario = comentario_form.save(commit=False)
+                comentario.usuario = request.user
+                comentario.post = post
+                comentario.save()
+                print(f"Comentario guardado: {comentario.contenido}")
+                return redirect('home')  # Redirige a la misma vista para ver el nuevo comentario
+
+        # Si no hay un POST, inicializa el formulario vacío
+        comentario_form = ComentarioForm()
+
+        return render(request, "home.html", {
+            "posts": posts,
+            "comentario_form": comentario_form,  # Pasar el formulario a la plantilla
+        })
+    
     return redirect("index")
+    
+    
+    #OTRO QUE SOLO MOSTRABA LAS PUBLICACIONES
+    # if request.user.is_authenticated:
+    #     # Filtrar publicaciones del usuario autenticado
+    #     #posts = Post.objects.filter(user=request.user).order_by('-created')
+    #     posts =Post.objects.all().order_by('-created')
+    #     return render(request, "home.html", {"posts": posts})
+    # return redirect("index")
 
 
 def perfil(request, username=None):
@@ -105,11 +135,14 @@ def perfil(request, username=None):
         if username:
             # Si se proporciona un nombre de usuario, obtenemos el perfil del usuario indicado
             user = get_object_or_404(User, username=username)
+            
         else:
             # Si no se proporciona un nombre de usuario, mostramos el perfil del usuario autenticado
             user = request.user
+            
         # Obtener el perfil del usuario
         perfil_usuario = get_object_or_404(PerfilUsuario, nombre=user)
+        
         # Obtener las publicaciones del usuario
         posts = Post.objects.filter(user=user).order_by('-created')
         guardados = perfil_usuario.posts_guardados.all()  # Obtener publicaciones guardadas
@@ -241,3 +274,30 @@ def privacidad(request):
 
 def terminos(request):
     return render(request, 'terminos.html')
+
+
+
+def comentarios(request, post_id):
+    return redirect("home")
+  
+  
+  # post = get_object_or_404(Post, id=post_id)
+    # comentarios = post.comentarios.all()  # Obtener todos los comentarios para la publicación
+
+    # if request.method == "POST" and request.user.is_authenticated:
+    #     comentario_form = ComentarioForm(request.POST)
+    #     if comentario_form.is_valid():
+    #         nuevo_comentario = comentario_form.save(commit=False)
+    #         nuevo_comentario.post = post
+    #         nuevo_comentario.usuario = request.user
+    #         nuevo_comentario.save()
+    #         return redirect('home', post_id=post.id)
+    # else:
+    #     comentario_form = ComentarioForm()
+
+    # context = {
+    #     'post': post,
+    #     'comentarios': comentarios,
+    #     'comentario_form': comentario_form,
+    # }
+    # return render(request, 'home.html', context)

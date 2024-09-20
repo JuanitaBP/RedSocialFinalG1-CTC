@@ -19,7 +19,7 @@ urlpatterns = [
     path('perfil/<str:username>/', views.perfil, name='ver_perfil'),  # Muestra el perfil de otro usuario por su nombre de usuario
     path('publicacion/editar/<int:post_id>/', views.editarPublicacion, name='editarPublicacion'),
     path('publicacion/eliminar/<int:post_id>/', views.EliminarPubli, name='eliminarPublicacion'),
-    path('publicacion/guardar/', views.toggle_guardar_publicacion, name='toggle_guardar_publicacion'),
+    path('publicacion/guardar/', views.toggle_guardar_publicacion, name='toggle_guardar_publicacion')
 
 
 

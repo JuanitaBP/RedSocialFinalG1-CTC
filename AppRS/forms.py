@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, PerfilUsuario
+from .models import Post, PerfilUsuario, Comentario
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 
@@ -33,3 +33,17 @@ class EditarUsuarioForm(forms.ModelForm):
         model = User
         fields = ['username']
 
+
+
+class ComentarioForm(forms.ModelForm):
+    class Meta:
+        model = Comentario
+        fields = ['contenido']
+        widgets = {
+            'contenido': forms.Textarea(attrs={
+                'placeholder': 'Escribe tu comentario aquí...',
+                'rows': 2,  # Define el número de filas (altura)
+                'cols': 45,  # Define el número de columnas (ancho)
+                'style': 'resize: none;'
+            }),
+        }
