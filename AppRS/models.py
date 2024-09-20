@@ -90,3 +90,10 @@ class Comentario(models.Model):
     def __str__(self):
         return f'Comentario de {self.usuario.username} en {self.post}'
   
+
+# class Like(models.Model):
+#     post = models.ForeignKey(Post, related_name='likes', on_delete=models.CASCADE)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+#     class Meta:
+#         unique_together = ('post', 'user')  # Asegura que un usuario solo pueda dar like una vez por publicación

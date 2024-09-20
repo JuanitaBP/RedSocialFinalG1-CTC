@@ -45,7 +45,7 @@
     <div class="post-actions">
       <i id="like-icon-{{ post.id }}" class="bi bi-heart"></i>
       <!-- Me gusta -->
-      <i class="bi bi-chat"></i>
+      <i class="bi bi-chat" onclick="toggleCommentForm('{{ post.id }}')"></i>
       <!-- Comentar -->
       <i class="bi bi-send"></i>
       <!-- Enviar -->
@@ -70,22 +70,27 @@
       <p>{{ post.descripcion }}</p>
     </div>
 
+    <!-- COMENTARIOS -->
     <div>
-      <h2>Comentarios</h2>
-      {% for comentario in comentarios %}
+      <h4>Tus amigos comentaron:</h4>
+      {% for comentario in post.comentarios.all %}
       <p>
-        <strong>{{ comentario.usuario.username }}:</strong> {{
-        comentario.contenido }}
+        <strong>{{ comentario.usuario.username }}:</strong>
+        {{ comentario.contenido }}
       </p>
+      <em>{{comentario.fecha_coment}}</em>
       {% empty %}
       <p>No hay comentarios aún.</p>
       {% endfor %}
 
-      <form method="POST">
-        {% csrf_token %} {{ comentario_form.as_p }}
-        <button type="submit">Agregar comentario</button>
+      <form id="comment-form-{{ post.id }}" method="POST" style="display: none">
+        {% csrf_token %}
+        <input type="hidden" name="post_id" value="{{ post.id }}" />
+        {{ comentario_form.as_p }}
+        <button type="submit">Comentar</button>
       </form>
     </div>
+
     <!-- Botones de editar y eliminar (solo para el propietario de la publicación) -->
     {% if post.user == request.user %}
     <div class="post-actions-buttons">
@@ -101,6 +106,17 @@
   {% endfor %}
 </div>
 
+<!-- OCUTAR Y MOSTRAR FORMULARIO COMENTARIO -->
+<script>
+  function toggleCommentForm(postId) {
+    const form = document.getElementById(`comment-form-${postId}`);
+    if (form.style.display === "none" || form.style.display === "") {
+      form.style.display = "block"; // Mostrar el formulario
+    } else {
+      form.style.display = "none"; // Ocultar el formulario
+    }
+  }
+</script>
 <!-- Script para manejar el guardado de publicaciones -->
 <script>
   document.querySelectorAll("[id^=save-icon]").forEach((icon) => {
