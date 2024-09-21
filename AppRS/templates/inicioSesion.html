@@ -7,6 +7,7 @@
 
 <head>
 <link rel="stylesheet" href="{% static 'from2InicioSesion.css' %}"><!-- Diseño para Inicio de Sesion-->
+
 </head>
 
 <body>
@@ -24,6 +25,8 @@
   
         <div class="form-groupIni">
             <button class="btn form-button2">Iniciar sesión</button>
+            
+    <a href="{% url 'index' %}" class="btn form-button2" style="text-decoration: none;">Cancelar</a>
         </div>
         
     </form>

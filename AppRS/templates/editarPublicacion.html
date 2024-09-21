@@ -2,33 +2,40 @@
 <title>Editar Publicación</title>
 {% endblock "titulo" %} {% block "content" %}
 
-<h1>Editar Publicación</h1>
+<div class="div-editarPubli">
+  <h3>Editar Publicación</h3>
 
-<form action="" method="POST" enctype="multipart/form-data">
-  {% csrf_token %} {{form}}
-  {% if post.imagen %}
-  <div>
-    <h2>Foto Actual:</h2>
-    <img
-      src="{{ post.imagen.url }}"
-      alt="Imagen actual"
-      style="max-width: 400px; max-height: 300px"
-    />
-  </div>
-  
-  {% endif %}
-  <!-- Aquí se Mostrará la imagen actual si existe -->
-  
-  <div style="max-width: 400px; max-height: 300px">
-    <h3>Cambiar por:</h3>
-    <!-- si no hay imagen, esperará a cargar una nueva imagen y la mostrará dentro del div -->
-    <div id="imagePreview" class="mt-3"></div>
-    <!-- Vista previa de la imagen se mostrará aquí-->
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %} {{form}}
+    {% if post.imagen %}
+    <div id="imagenEdit">
+      <h4>Foto Actual:</h4>
+      <img
+        src="{{ post.imagen.url }}"
+        alt="Imagen actual"
+        style="max-width: 400px; max-height: 300px"
+      />
     </div>
-  </div>
+    
+    {% endif %}
+    <!-- Aquí se Mostrará la imagen actual si existe -->
+    
+    <div style="max-width: 400px; max-height: 300px">
+      <h4>Cambiar por:</h4>
+      <!-- si no hay imagen, esperará a cargar una nueva imagen y la mostrará dentro del div -->
+      <div id="imagePreview" class="mt-3"></div>
+      <!-- Vista previa de la imagen se mostrará aquí-->
+      </div>
+    </div>
+    
+    <div class="botonPubli">
+      <!-- Agrega este div -->
+      <button class="btn btn-warning">Guardar</button>
+      <a href="{% url 'home' %}" class="btn btn-warning">Cancelar</a>
+    </div>
+  </form>
   
-  <button>Guardar</button>
-</form>
+</div>
 
 <!-- ESTE SCRIPT VISUALIZARÁ LA IMAGEN CARGADA ANTES DE PUBLICARSE -->
 <script>
@@ -62,5 +69,5 @@
       });
     });
   </script>
-<a href="{% url 'home' %}">Cancelar</a>
+
 {% endblock "content" %}

@@ -42,7 +42,7 @@ class ComentarioForm(forms.ModelForm):
         widgets = {
             'contenido': forms.Textarea(attrs={
                 'placeholder': 'Escribe tu comentario aquí...',
-                'rows': 2,  # Define el número de filas (altura)
+                'rows': 1,  # Define el número de filas (altura)
                 'cols': 45,  # Define el número de columnas (ancho)
                 'style': 'resize: none;'
             }),

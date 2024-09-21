@@ -8,11 +8,13 @@
         <div>
             <h2><strong>{{ post.titulo }}</strong>
             </h2>
+            {% if post.imagen %}
         <img
           src="{{ post.imagen.url }}"
           alt="Imagen actual"
           style="max-width: 400px; max-height: 300px"
         />
+        {% endif %}
         <p>{{post.descripcion}}</p>
         <em>{{post.created}}</em>
         </div>

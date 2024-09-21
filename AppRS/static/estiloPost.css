@@ -12,25 +12,36 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    width: 500px;                /* Ancho máximo de la tarjeta, similar al estilo de Instagram */
-    margin: 20px auto;           /* Márgenes automáticos para centrar la tarjeta */
+    
+    
+    max-width: 700px;               /* Ancho máximo de la tarjeta, similar al estilo de Instagram */
+    /* width: 700px; */
+    margin: 10px auto;           /* Márgenes automáticos para centrar la tarjeta */
     transition: transform 0.2s;
 }
 
 .post-card:hover {
-    transform: scale(1.05);      /* Efecto hover */
+    transform: scale(1.02);      /* Efecto hover */
 }
-
+.post-header{
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
+}
+.post-header p{
+ padding-top: 10px;
+ padding-left: 10px;
+}
 /* Imagen dentro de la tarjeta */
 .post-image {
     width: 100%;                 /* Imagen ocupa todo el ancho de la tarjeta */
-    height: 500px;               /* Limitar la altura máxima de la imagen */
+    max-height: 800px;               /* Limitar la altura máxima de la imagen */
     object-fit: cover;           /* Ajuste de la imagen sin perder la proporción */
 }
 
 /* Contenido del post */
 .post-content {
-    padding: 15px;
+    padding: 10px;
 }
 
 .post-content h2 {
@@ -48,6 +59,13 @@
     font-size: 0.9em;
 }
 
+.card-publi {
+    color: #777;
+}
+.text-end {
+    text-align: right; /* Alinea el texto a la derecha */
+    padding-right: 8px;
+  }
 /* Estilo para los iconos del post */
 .post-actions {
     display: flex;
@@ -69,12 +87,15 @@
 /* Contenedor para los botones de editar y eliminar */
 .post-actions-buttons {
     display: flex;
-    justify-content: space-between; /* Colocar los botones en extremos opuestos */
-    padding: 10px 15px;
+    justify-content: right; /* Colocar los botones en extremos opuestos */
+    gap: 5px; /* Espacio entre los botones */
+    padding: 10px 10px;
+    font-size: 13px;
 }
 
 .post-actions-buttons .btn {
-    padding: 5px 15px; /* Tamaño de los botones */
+    padding: 5px 5px; /* Tamaño de los botones */
+    margin-bottom: 10px;
     font-size: 0.9em; /* Un tamaño de texto ligeramente más pequeño */
     border-radius: 5px; /* Bordes redondeados */
     transition: background-color 0.3s ease; /* Transición suave para el color */
@@ -82,7 +103,7 @@
 
 /* Estilo para el botón de editar */
 .post-actions-buttons .btn-warning {
-    background-color: #52a1da;
+    background-color: #67b8f1;
     border: none;
     color: white;
 }
@@ -93,11 +114,50 @@
 
 /* Estilo para el botón de eliminar */
 .post-actions-buttons .btn-danger {
-    background-color: #dc3545;
+    background-color: #f76473;
     border: none;
     color: white;
 }
 
 .post-actions-buttons .btn-danger:hover {
-    background-color: #c82333; /* Color más oscuro al pasar el ratón */
+    background-color: #FE979C; /* Color más oscuro al pasar el ratón */
+}
+
+.div-crearPubli{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0,5, 0.5);
+}
+
+#imagePreview{
+    max-width: 600px;
+}
+
+.botonPubli{
+    text-align: center;
+    padding: 10px;
+    margin: 0px;
+}
+
+.div-editarPubli{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0,5, 0.5);
+}
+
+#imagenEdit {
+    max-width: 200px;
+}
+
+
+.btn-warning {
+    background-color: #67b8f1;
+    border: none;
+    color: white;
 }
