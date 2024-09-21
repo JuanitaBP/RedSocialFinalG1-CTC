@@ -1,5 +1,6 @@
-body{
+html,body{
   background-color: #B084BA;
+  height: 100%;
 }
 .fondo2{
   background-color: #B084BA;
@@ -20,13 +21,15 @@ background-color: #AAB6DE;
 
 .ColorEncabezado{
   background-color: #8364A0;
-  
 }
 
 .ColorFooter{
+
   background-color: #8364A0;
-  height: 200px;
+  height: 105px;
 }
+
+
 
 /* ------------vistas del navegador cuando ya inicias sesion --------*/
 
@@ -46,6 +49,8 @@ nav .estiloIcon hover {
   
 }
 
+
+
 /*----------------para el perfil--------------------*/
 /* Contenedor principal del perfil */
 .profile-container {
@@ -59,8 +64,11 @@ nav .estiloIcon hover {
 /* Sección superior del perfil */
 .profile-header {
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  padding-top: 20px;
 }
 
 /* Botón de editar perfil */
@@ -166,6 +174,12 @@ nav .estiloIcon hover {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+  padding:10px;
+  
+}
+.post-item{
+  padding-bottom: 20px;
+  background-color: #c9aae6;
 }
 
 .post-item img {
@@ -177,7 +191,7 @@ nav .estiloIcon hover {
 }
 
 .post-item img:hover {
-  transform: scale(1.05);
+  transform: scale(1.01);
 }
 
 
@@ -305,3 +319,43 @@ form a.btn-secondary:hover {
   padding: 5px;
   border-radius: 5px;
 }
+
+.HomeTitulo{
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+
+.comentario{
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+}
+.comentario p{
+  margin: 5px;
+}
+.comentario em{
+  font-size: 10px;
+  display: flex;
+    justify-content: right; /* Colocar los botones en extremos opuestos */
+    gap: 10px;
+}
+
+
+.formComentario {
+  align-items: center;
+}
+
+
+.formComentario div {
+  flex-grow: 1;
+  margin-right: 10px; /* Espacio entre textarea y botón */
+}
+/* .formComentario{
+  display: flex;
+    justify-content: center;
+    flex-direction: column;
+} */
+/* .btnComent{
+  background-color: #8364A0;
+} */

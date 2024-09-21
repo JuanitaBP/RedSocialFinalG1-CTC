@@ -15,9 +15,12 @@
     <!-- Imagen de perfil -->
     <div class="profile-image">
       {% if perfil.foto_perfil %}
-        <img src="{{ perfil.foto_perfil.url }}" alt="Imagen de perfil" />
+      <img src="{{ perfil.foto_perfil.url }}" alt="Imagen de perfil" />
       {% else %}
-        <img src="https://i.pinimg.com/564x/de/ec/53/deec53e7c3d6cbb8bcaa38d208cfcc46.jpg" alt="Imagen de perfil predeterminada" />
+      <img
+        src="https://i.pinimg.com/564x/de/ec/53/deec53e7c3d6cbb8bcaa38d208cfcc46.jpg"
+        alt="Imagen de perfil predeterminada"
+      />
       {% endif %}
     </div>
 
@@ -26,13 +29,17 @@
       <h2>{{ user.username }}</h2>
       <!-- Botón de editar perfil (Solo se muestra si es el perfil del usuario autenticado) -->
       {% if user == perfil.nombre %}
-      <a href="{% url 'editar_perfil' %}" class="btn btn-outline-light editar-perfil-btn">Editar perfil</a>
+      <a
+        href="{% url 'editar_perfil' %}"
+        class="btn btn-outline-light editar-perfil-btn"
+        >Editar perfil</a
+      >
       {% endif %}
-      
+
       <div class="profile-stats">
-        <span><strong>{{ num_publicaciones }}</strong> publicaciones</span>
+        <span><strong>{{ num_publicaciones }}</strong> Publicaciones</span>
         <span><strong>{{ num_seguidores }}</strong> seguidores</span>
-        <span><strong>{{ num_seguidos }}</strong> seguidos</span>
+        <span><strong>{{ num_seguidos }}</strong> Seguidos</span>
       </div>
 
       <!-- Descripción o biografía -->
@@ -45,55 +52,60 @@
   <!-- Barra de navegación (Publicaciones, Guardado, Etiquetas) -->
   <div class="profile-nav">
     <button id="btn-publicaciones" class="active">Publicaciones</button>
-    <button id="btn-guardados">Guardado</button>
+    <button id="btn-guardados">Guardados</button>
   </div>
 
   <!-- Sección de publicaciones en cuadrícula -->
   <div class="profile-posts-grid" id="publicaciones">
-    {% if posts %}
-      {% for post in posts %}
-        <div class="post-item">
-          {% if post.imagen %}
-          <img src="{{ post.imagen.url }}" alt="Publicación" />
-          {% endif %}
-        </div>
-      {% endfor %}
-    {% else %}
-      <p>Este usuario no tiene publicaciones.</p>
+    {% if posts %} {% for post in posts %}
+    <div class="post-item">
+      <h5>{{post.titulo}}</h5>
+      <p>{{post.descripcion}}</p>
+      {% if post.imagen %}
+      <img src="{{ post.imagen.url }}" alt="Publicación" />
+      {% endif %}
+      <em>{{post.created|date:"d M Y H:i"}}</em>
+    </div>
+    {% endfor %} {% else %}
+    <p>No tienes publicaciones.</p>
     {% endif %}
   </div>
 
   <!-- Sección de publicaciones guardadas en cuadrícula (Oculta inicialmente) -->
-  <div class="profile-posts-grid" id="guardados" style="display: none;">
-    {% if guardados %}
-      {% for post in guardados %}
-        <div class="post-item">
-          {% if post.imagen %}
-          <img src="{{ post.imagen.url }}" alt="Publicación Guardada" />
-          {% endif %}
-        </div>
-      {% endfor %}
-    {% else %}
-      <p>No tienes publicaciones guardadas.</p>
+  <div class="profile-posts-grid" id="guardados" style="display: none">
+    {% if guardados %} {% for post in guardados %}
+    <div class="post-item">
+      <h5>{{post.titulo}}</h5>
+      <p>{{post.descripcion}}</p>
+      {% if post.imagen %}
+      <img src="{{ post.imagen.url }}" alt="Publicación Guardada" />
+      {% endif %}
+      <em>{{post.created|date:"d M Y H:i"}}</em>
+    </div>
+    {% endfor %} {% else %}
+    <p>No tienes publicaciones guardadas.</p>
     {% endif %}
   </div>
 
   <!-- Script para alternar entre publicaciones y guardados -->
   <script>
-    document.getElementById('btn-publicaciones').addEventListener('click', function() {
-      document.getElementById('publicaciones').style.display = 'grid';
-      document.getElementById('guardados').style.display = 'none';
-      this.classList.add('active');
-      document.getElementById('btn-guardados').classList.remove('active');
-    });
+    document
+      .getElementById("btn-publicaciones")
+      .addEventListener("click", function () {
+        document.getElementById("publicaciones").style.display = "grid";
+        document.getElementById("guardados").style.display = "none";
+        this.classList.add("active");
+        document.getElementById("btn-guardados").classList.remove("active");
+      });
 
-    document.getElementById('btn-guardados').addEventListener('click', function() {
-      document.getElementById('guardados').style.display = 'grid';
-      document.getElementById('publicaciones').style.display = 'none';
-      this.classList.add('active');
-      document.getElementById('btn-publicaciones').classList.remove('active');
-    });
+    document
+      .getElementById("btn-guardados")
+      .addEventListener("click", function () {
+        document.getElementById("guardados").style.display = "grid";
+        document.getElementById("publicaciones").style.display = "none";
+        this.classList.add("active");
+        document.getElementById("btn-publicaciones").classList.remove("active");
+      });
   </script>
-
 </body>
 {% endblock "content" %}

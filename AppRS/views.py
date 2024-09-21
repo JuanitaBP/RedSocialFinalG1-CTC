@@ -145,7 +145,9 @@ def perfil(request, username=None):
         
         # Obtener las publicaciones del usuario
         posts = Post.objects.filter(user=user).order_by('-created')
+        
         guardados = perfil_usuario.posts_guardados.all()  # Obtener publicaciones guardadas
+        # print(f"Posts: {posts}, Guardados: {guardados}")
         # Pasar los datos del perfil y las publicaciones al contexto
         context = {
             'perfil': perfil_usuario,
@@ -254,7 +256,7 @@ def toggle_guardar_publicacion(request):
        # print(f"Post ID: {post_id}")
         post = get_object_or_404(Post, id=post_id)
         perfil = request.user.perfilusuario
-
+        print(perfil)
         if post in perfil.posts_guardados.all():
             perfil.posts_guardados.remove(post)
             saved = False
